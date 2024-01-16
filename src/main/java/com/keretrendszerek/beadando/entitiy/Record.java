@@ -26,4 +26,10 @@ public class Record {
     private String region;
     @Column(name = "review_id")
     private long reviewId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "collections",
+            joinColumns={@JoinColumn(name="record_id", referencedColumnName="id")})
+    private Collection collection;
 }

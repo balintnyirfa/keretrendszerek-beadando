@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,4 +25,10 @@ public class Collection {
     private long recordId;
     /*@Column(name = "count")
     private int count;*/
+
+    @OneToOne(mappedBy = "collections")
+    private User user;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Record record;
 }
