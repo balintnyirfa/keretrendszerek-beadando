@@ -1,4 +1,4 @@
-package com.keretrendszerek.beadando.entitiy;
+package com.keretrendszerek.beadando.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -38,9 +38,12 @@ public class User {
             inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")})
     private List<Role> roles = new ArrayList<Role>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "collections",
-            joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")})
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
     private Collection collection;
+
+    /*@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    //@JoinColumn(name="user_id", referencedColumnName="id")
+    @PrimaryKeyJoinColumn
+    private Collection collection;*/
 }

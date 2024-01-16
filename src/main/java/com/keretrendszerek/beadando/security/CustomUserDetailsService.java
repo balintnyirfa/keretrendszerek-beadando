@@ -1,7 +1,7 @@
 package com.keretrendszerek.beadando.security;
 
-import com.keretrendszerek.beadando.entitiy.Role;
-import com.keretrendszerek.beadando.entitiy.User;
+import com.keretrendszerek.beadando.entity.Role;
+import com.keretrendszerek.beadando.entity.User;
 import com.keretrendszerek.beadando.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

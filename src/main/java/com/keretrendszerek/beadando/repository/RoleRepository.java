@@ -1,6 +1,6 @@
 package com.keretrendszerek.beadando.repository;
 
-import com.keretrendszerek.beadando.entitiy.Role;
+import com.keretrendszerek.beadando.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {

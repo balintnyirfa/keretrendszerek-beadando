@@ -1,4 +1,4 @@
-package com.keretrendszerek.beadando.entitiy;
+package com.keretrendszerek.beadando.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,8 @@
 package com.keretrendszerek.beadando.service.impl;
 
 import com.keretrendszerek.beadando.dto.UserDto;
-import com.keretrendszerek.beadando.entitiy.Role;
-import com.keretrendszerek.beadando.entitiy.User;
+import com.keretrendszerek.beadando.entity.Role;
+import com.keretrendszerek.beadando.entity.User;
 import com.keretrendszerek.beadando.repository.RoleRepository;
 import com.keretrendszerek.beadando.repository.UserRepository;
 import com.keretrendszerek.beadando.service.UserService;

@@ -1,12 +1,7 @@
 package com.keretrendszerek.beadando.service;
 
 import com.keretrendszerek.beadando.dto.UserDto;
-import com.keretrendszerek.beadando.entitiy.User;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import com.keretrendszerek.beadando.entity.User;
 
 import java.util.List;
 

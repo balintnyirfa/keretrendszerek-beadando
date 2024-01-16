@@ -1,4 +1,4 @@
-package com.keretrendszerek.beadando.entitiy;
+package com.keretrendszerek.beadando.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Record {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private long id;
     @Column(name = "artist")
     private String artist;
     @Column(name = "title")
@@ -27,9 +27,9 @@ public class Record {
     @Column(name = "review_id")
     private long reviewId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    /*@ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(
             name = "collections",
             joinColumns={@JoinColumn(name="record_id", referencedColumnName="id")})
-    private Collection collection;
+    private Collection collection;*/
 }

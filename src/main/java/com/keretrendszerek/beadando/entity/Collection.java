@@ -1,13 +1,10 @@
-package com.keretrendszerek.beadando.entitiy;
+package com.keretrendszerek.beadando.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -19,16 +16,21 @@ public class Collection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "user_id")
+    @Column(name = "user_id", insertable=false, updatable=false)
     private long userId;
     @Column(name = "record_id")
     private long recordId;
-    /*@Column(name = "count")
-    private int count;*/
 
-    @OneToOne(mappedBy = "collections")
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Record record;
+    /*@OneToOne(mappedBy = "collections")
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_id")
+    private User user;*/
+
+    /*@ManyToOne(cascade = CascadeType.ALL)
+    private Record record;*/
 }
