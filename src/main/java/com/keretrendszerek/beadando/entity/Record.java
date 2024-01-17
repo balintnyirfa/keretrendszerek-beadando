@@ -27,6 +27,7 @@ public class Record {
     @Column(name = "review_id")
     private long reviewId;
 
+    // collections table + records table
     /*@ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(
             name = "collections",

@@ -18,19 +18,14 @@ public class Collection {
     private long id;
     @Column(name = "user_id", insertable=false, updatable=false)
     private long userId;
-    @Column(name = "record_id")
+    @Column(name = "record_id", insertable=false, updatable=false)
     private long recordId;
 
+    // users table + collection table
     @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
     private User user;
 
-    /*@OneToOne(mappedBy = "collections")
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "user_id")
-    private User user;*/
-
-    /*@ManyToOne(cascade = CascadeType.ALL)
-    private Record record;*/
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "record_id")
+    private Record record;
 }

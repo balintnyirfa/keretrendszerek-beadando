@@ -31,6 +31,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    // users table + roles table
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(
             name="users_roles",
@@ -38,12 +39,8 @@ public class User {
             inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")})
     private List<Role> roles = new ArrayList<Role>();
 
+    // users table + collection table
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, optional = false)
     private Collection collection;
-
-    /*@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    //@JoinColumn(name="user_id", referencedColumnName="id")
-    @PrimaryKeyJoinColumn
-    private Collection collection;*/
 }
