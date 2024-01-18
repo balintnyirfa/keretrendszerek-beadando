@@ -1,24 +1,27 @@
 package com.keretrendszerek.beadando.controller;
 
 import com.keretrendszerek.beadando.dto.UserDto;
+import com.keretrendszerek.beadando.entity.Record;
 import com.keretrendszerek.beadando.entity.User;
+import com.keretrendszerek.beadando.service.RecordService;
 import com.keretrendszerek.beadando.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 public class AuthController {
     private UserService userService;
+    private RecordService recordService;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, RecordService recordService) {
         this.userService = userService;
+        this.recordService = recordService;
     }
 
     @GetMapping("/index")
@@ -55,10 +58,40 @@ public class AuthController {
         return "redirect:/register?success";
     }
 
-    @GetMapping("/users")
+    /*@GetMapping("/users")
     public String users(Model model) {
         List<UserDto> users = userService.findAllUsers();
         model.addAttribute("users", users);
-        return "users";
+        return "listRecords";
+    }*/
+
+    @GetMapping("/listRecords")
+    public String listRecords(Model model) {
+        //List<Record> records = recordService.getAllRecords();
+        //model.addAttribute("records", records);
+        //return "listRecords";
+        return findPaginated(1, "artist", "asc", model);
+    }
+
+    @GetMapping("/page/{pageNo}")
+    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
+                                @RequestParam("sortField") String sortField,
+                                @RequestParam("sortDir") String sortDir,
+                                Model model) {
+        int pageSize = 100;
+
+        Page<Record> page = recordService.findPaginated(pageNo, pageSize, sortField, sortDir);
+        List<Record> listRecords = page.getContent();
+
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+        model.addAttribute("listRecords", listRecords);
+        return "listRecords";
     }
 }

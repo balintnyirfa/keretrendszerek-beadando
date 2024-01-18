@@ -24,8 +24,8 @@ public class Record {
     private String format;
     @Column(name = "region")
     private String region;
-    @Column(name = "review_id")
-    private long reviewId;
+    /*@Column(name = "review_id")
+    private long reviewId;*/
 
     // collections table + records table
     /*@ManyToOne(cascade = CascadeType.ALL)
