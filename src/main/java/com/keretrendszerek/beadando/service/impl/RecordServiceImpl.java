@@ -42,7 +42,7 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public void deleteRecordById(long id) {
-        this.recordRepository.findById(id);
+        this.recordRepository.deleteById(id);
     }
 
     @Override

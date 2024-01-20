@@ -1,9 +1,11 @@
 package com.keretrendszerek.beadando.config;
 
+import com.keretrendszerek.beadando.controller.RecordController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.web.HttpSecurityDsl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -26,14 +28,17 @@ public class SpringSecurity {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/register/**").permitAll()
-                                .requestMatchers("/index").permitAll()
-                                .requestMatchers("/listRecords").permitAll()
-                                .requestMatchers("/uploadRecord").permitAll()
-                                .requestMatchers("/saveRecord").permitAll()
-                                .requestMatchers("/showNewRecordForm").permitAll()
-                                .requestMatchers("/").permitAll()
+        http.authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/register/**").permitAll()
+                        .requestMatchers("/index").permitAll()
+                        .requestMatchers("/listRecords/**").permitAll()
+                        .requestMatchers("/uploadRecord").permitAll()
+                        .requestMatchers("/saveRecord").permitAll()
+                        .requestMatchers("/showNewRecordForm").permitAll()
+                        .requestMatchers("/showFormForUpdate/*").permitAll()
+                        .requestMatchers("/updateRecord/*").permitAll()
+                        .requestMatchers("/deleteRecord/*").permitAll()
+                        .requestMatchers("/").permitAll()
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")

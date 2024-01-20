@@ -3,12 +3,9 @@ package com.keretrendszerek.beadando.controller;
 import com.keretrendszerek.beadando.entity.Record;
 import com.keretrendszerek.beadando.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 public class RecordController {
@@ -40,19 +37,16 @@ public class RecordController {
 
     @GetMapping("/showFormForUpdate/{id}")
     public String showFormForUpdate(@PathVariable( value = "id") long id, Model model) {
-
-        // get employee from the service
         Record record = recordService.getRecordById(id);
 
-        // set employee as a model attribute to pre-populate the form
         model.addAttribute("record", record);
-        return "update_record";
+        return "updateRecord";
     }
 
-    @GetMapping("/deleteRecordById/{id}")
+    @GetMapping("/deleteRecord/{id}")
     public String deleteRecord(@PathVariable (value = "id") long id) {
         this.recordService.deleteRecordById(id);
-        return "redirect:/";
+        return "redirect:/listRecords";
     }
 
     /*@GetMapping("/page/{pageNo}")
