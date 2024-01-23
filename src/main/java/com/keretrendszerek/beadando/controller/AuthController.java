@@ -58,13 +58,6 @@ public class AuthController {
         return "redirect:/register?success";
     }
 
-    /*@GetMapping("/users")
-    public String users(Model model) {
-        List<UserDto> users = userService.findAllUsers();
-        model.addAttribute("users", users);
-        return "listRecords";
-    }*/
-
     @GetMapping("/listRecords")
     public String listRecords(Model model) {
         //List<Record> records = recordService.getAllRecords();

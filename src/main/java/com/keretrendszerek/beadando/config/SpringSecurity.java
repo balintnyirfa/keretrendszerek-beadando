@@ -9,9 +9,12 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.HttpSecurityDsl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -27,10 +30,25 @@ public class SpringSecurity {
     }
 
     @Bean
+    public InMemoryUserDetailsManager userDetailsService() {
+        UserDetails admin = User.withUsername("admin")
+                .password(passwordEncoder().encode("adminPass"))
+                .roles("ADMIN")
+                .build();
+        UserDetails user = User.withUsername("user")
+                .password(passwordEncoder().encode("userPass"))
+                .roles("USER")
+                .build();
+        return new InMemoryUserDetailsManager(admin, user);
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/").permitAll()
                         .requestMatchers("/register/**").permitAll()
-                        .requestMatchers("/index").permitAll()
+                        .requestMatchers("/login/**").permitAll()
+                        .requestMatchers("/index/**").permitAll()
                         .requestMatchers("/listRecords/**").permitAll()
                         .requestMatchers("/uploadRecord").permitAll()
                         .requestMatchers("/saveRecord").permitAll()
@@ -38,12 +56,14 @@ public class SpringSecurity {
                         .requestMatchers("/showFormForUpdate/*").permitAll()
                         .requestMatchers("/updateRecord/*").permitAll()
                         .requestMatchers("/deleteRecord/*").permitAll()
-                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/listUsers").permitAll()
+                        .requestMatchers("/deleteUser/*").permitAll()
+                        .requestMatchers("/updateUser/*").permitAll()
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/listRecords")
+                                .defaultSuccessUrl("/listUsers")
                                 .permitAll()
                 ).logout(
                         logout -> logout
