@@ -1,5 +1,6 @@
 package com.keretrendszerek.beadando.entity;
 
+import com.keretrendszerek.beadando.service.UserService;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,4 +44,11 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, optional = false)
     private Collection collection;
+
+    @PreRemove
+    private void removeBookAssociations() {
+        for (Role role : this.roles) {
+            role.getUsers().remove(this);
+        }
+    }
 }

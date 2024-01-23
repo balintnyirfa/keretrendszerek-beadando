@@ -22,4 +22,9 @@ public class Role {
     private String name;
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
+
+    public void removeUser(User user) {
+        this.users.remove(user);
+        user.getRoles().remove(this);
+    }
 }
