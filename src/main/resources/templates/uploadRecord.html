@@ -8,7 +8,7 @@
   <title>DISCON</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" th:href="@{/listRecords}">DISCON</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -25,7 +25,7 @@
             <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
             @@ -32,15 +32,15 @@
 </nav>
-<div class="container my-2">
+<div class="container py-4 px-2">
   <h1>Upload a new record</h1>
     <form action="#" th:action="@{/saveRecord}" th:object="${record}" method="POST">
       <input type="hidden" th:field="*{id}">

@@ -6,7 +6,7 @@
     <title>DISCON</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" th:href="@{/index}">DISCON</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,5 +24,14 @@
     </div>
   </div>
 </nav>
+<div class="jumbotron jumbotron-fluid py-4 px-2">
+  <h1 class="display-4 text-center">Manage your own collection!</h1>
+  <p class="lead text-center">Pick out the records you own from our huge music collection and show the world how your music taste is much better than theirs!</p>
+  <hr class="my-4">
+  <p class=" text-center">Not registered yet? Click the button below and create your account now!</p>
+  <p class="lead text-center">
+    <a class="btn btn-primary btn-lg" th:href="@{/register}" role="button">Register</a>
+  </p>
+</div>
 </body>
 </html>

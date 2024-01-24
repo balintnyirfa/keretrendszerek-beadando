@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/listRecords}">DISCON</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -30,7 +30,7 @@
         </div>
     </div>
 </nav>
-<div class="container my-2">
+<div class="container py-4 px-2">
     <h1>Update your record</h1>
     <form action="#" th:action="@{/saveRecord}" th:object="${record}" method="post">
         <input type="hidden" th:field="*{id}">
