@@ -21,29 +21,36 @@
     </div>
   </div>
 </nav>
-<div class="container py-4 px-2">
-  <div class="row col-md-10">
-    <h2>List of registered users</h2>
+<div class="container">
+  <div class="jumbotron jumbotron-fluid py-4 px-2">
+    <h1 class="display-4 text-center">List of registered users</h1>
+    <hr>
+    <span>
+      <p class="lead text-center">Manage registered users from our database</p>
+    </span>
   </div>
-  <table class="table table-bordered table-hover">
-    <thead class="table-dark">
-    <tr>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each = "user : ${listUsers}">
-      <td th:text = "${user.username}"></td>
-      <td th:text = "${user.email}"></td>
-      <td>
-        <a th:href="@{/showFormForUserUpdate/{id}(id=${user.id})}" class="btn btn-primary">Update</a>
-        <a th:href="@{/deleteUser/{id}(id=${user.id})}" class="btn btn-danger">Delete</a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="container-fluid py-4 px-2">
+    <table class="table table-bordered table-hover table-group-divider">
+      <thead class="table-dark">
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each = "user : ${listUsers}">
+        <td th:text = "${user.username}"></td>
+        <td th:text = "${user.email}"></td>
+        <td>
+          <a th:href="@{/showFormForUserUpdate/{id}(id=${user.id})}" class="btn btn-primary">Update</a>
+          <a th:href="@{/deleteUser/{id}(id=${user.id})}" class="btn btn-danger">Delete</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>
 </body>
 </html>
