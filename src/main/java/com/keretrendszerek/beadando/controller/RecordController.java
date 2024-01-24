@@ -32,7 +32,7 @@ public class RecordController {
     public String showNewRecordForm(Model model) {
         Record record = new Record();
         model.addAttribute("record", record);
-        return "uploadRecord";
+        return "updateUser";
     }
 
     @GetMapping("/showFormForUpdate/{id}")

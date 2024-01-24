@@ -39,7 +39,6 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userDto.getEmail());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
-
         Role role = roleRepository.findByName("ROLE_USER");
         if(role == null){
             role = checkRoleExist();
@@ -74,6 +73,10 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(" user not found for id :: " + id);
         }
         return user;
+    }
+
+    @Override
+    public void updateUser(long id) {
     }
 
 

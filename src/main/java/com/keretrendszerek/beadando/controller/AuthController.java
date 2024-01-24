@@ -5,11 +5,13 @@ import com.keretrendszerek.beadando.entity.Record;
 import com.keretrendszerek.beadando.entity.User;
 import com.keretrendszerek.beadando.service.RecordService;
 import com.keretrendszerek.beadando.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +34,14 @@ public class AuthController {
     @GetMapping("/login")
     public String login(){
         return "login";
+    }
+
+    @GetMapping("/default")
+    public String defaultAfterLogin(HttpServletRequest request) {
+        if (request.isUserInRole("ROLE_ADMIN")) {
+            return "redirect:/listUsers";
+        }
+        return "redirect:/listRecords";
     }
 
     @GetMapping("/register")

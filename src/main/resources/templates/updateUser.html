@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/listRecords}">Collection</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/listUsers}">Collection</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
@@ -31,16 +31,15 @@
     </div>
 </nav>
 <div class="container my-2">
-    <h1>Upload a new record</h1>
-    <form action="#" th:action="@{/saveRecord}" th:object="${record}" method="POST">
+    <h1>Update the user</h1>
+    <form action="#" th:action="@{/saveUser}" th:object="${user}" method="POST">
         <input type="hidden" th:field="*{id}">
-        <input type="text" th:field="*{artist}" class="form-control mb-4 col-4">
-        <input type="text" th:field="*{title}" class="form-control mb-4 col-4">
-        <input type="text" th:field="*{format}" class="form-control mb-4 col-4">
-        <input type="text" th:field="*{region}" class="form-control mb-4 col-4">
-        <button type="submit" class="btn btn-info col-2">Upload record</button>
+        <input type="text" th:field="*{username}" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{email}" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{password}" class="form-control mb-4 col-4">
+        <button type="submit" class="btn btn-info col-2">Update user</button>
     </form>
-    <a th:href="@{/listRecords}">Back to collection</a>
+    <a th:href="@{/listUsers}">Back to users</a>
 </div>
 </body>
 
