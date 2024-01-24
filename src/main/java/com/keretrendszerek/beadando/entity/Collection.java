@@ -21,7 +21,6 @@ public class Collection {
     @Column(name = "record_id", insertable=false, updatable=false)
     private long recordId;
 
-    // users table + collection table
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
 

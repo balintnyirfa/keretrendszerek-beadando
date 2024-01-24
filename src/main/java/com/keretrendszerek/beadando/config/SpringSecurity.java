@@ -31,28 +31,6 @@ public class SpringSecurity {
     }
 
     @Bean
-    public UserDetailsService users() {
-
-        UserBuilder users = User.withDefaultPasswordEncoder();
-
-        UserDetails user = users
-                .username("user")
-                .password("password")
-                .roles("USER")
-                //.authorities("READ")
-                .build();
-
-        UserDetails admin = users
-                .username("admin")
-                .password("password")
-                .roles("ADMIN")
-                //.authorities("READ", "CREATE", "DELETE")
-                .build();
-
-        return new InMemoryUserDetailsManager(user, admin);
-    }
-
-    /*@Bean
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails admin = User.withUsername("admin")
                 .password(passwordEncoder().encode("adminPass"))
@@ -62,8 +40,12 @@ public class SpringSecurity {
                 .password(passwordEncoder().encode("userPass"))
                 .roles("USER")
                 .build();
-        return new InMemoryUserDetailsManager(admin, user);
-    }*/
+        UserDetails manager = User.withUsername("manager")
+                .password(passwordEncoder().encode("userPass"))
+                .roles("MANAGER")
+                .build();
+        return new InMemoryUserDetailsManager(admin, user, manager);
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -74,17 +56,17 @@ public class SpringSecurity {
                         .requestMatchers("/login/**").permitAll()
                         .requestMatchers("/default").permitAll()
                         .requestMatchers("/listRecords/**").hasRole("USER")
-                        .requestMatchers("/uploadRecord").permitAll()
-                        .requestMatchers("/saveRecord").permitAll()
-                        .requestMatchers("/showNewRecordForm").permitAll()
-                        .requestMatchers("/showFormForUpdate/*").permitAll()
-                        .requestMatchers("/updateRecord/*").permitAll()
-                        .requestMatchers("/deleteRecord/*").permitAll()
+                        .requestMatchers("/uploadRecord").hasRole("USER")
+                        .requestMatchers("/saveRecord").hasRole("USER")
+                        .requestMatchers("/showNewRecordForm").hasRole("USER")
+                        .requestMatchers("/showFormForUpdate/*").hasRole("USER")
+                        .requestMatchers("/updateRecord/*").hasRole("USER")
+                        .requestMatchers("/deleteRecord/*").hasRole("USER")
                         .requestMatchers("/listUsers").hasRole("ADMIN")
-                        .requestMatchers("/saveUser").permitAll()
-                        .requestMatchers("/deleteUser/*").permitAll()
-                        .requestMatchers("/updateUser/*").permitAll()
-                        .requestMatchers("/showFormForUserUpdate/*").permitAll()
+                        .requestMatchers("/saveUser").hasRole("ADMIN")
+                        .requestMatchers("/deleteUser/*").hasRole("ADMIN")
+                        .requestMatchers("/updateUser/*").hasRole("ADMIN")
+                        .requestMatchers("/showFormForUserUpdate/*").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 ).formLogin(
                         form -> form

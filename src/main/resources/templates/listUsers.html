@@ -30,7 +30,6 @@
     <tr>
       <th>Username</th>
       <th>Email</th>
-      <th>ID</th>
       <th>Actions</th>
     </tr>
     </thead>
@@ -38,7 +37,6 @@
     <tr th:each = "user : ${listUsers}">
       <td th:text = "${user.username}"></td>
       <td th:text = "${user.email}"></td>
-      <td th:text = "${user.id}"></td>
       <td>
         <a th:href="@{/showFormForUserUpdate/{id}(id=${user.id})}" class="btn btn-primary">Update</a>
         <a th:href="@{/deleteUser/{id}(id=${user.id})}" class="btn btn-danger">Delete</a>
