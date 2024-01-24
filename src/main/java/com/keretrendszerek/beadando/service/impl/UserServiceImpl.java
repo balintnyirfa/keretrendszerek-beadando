@@ -76,16 +76,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(long id) {
+    public void updateUser(User user, UserDto userDto) {
+        user.setId(userDto.getId());
+        this.userRepository.save(user);
     }
-
 
     @Override
     public List<UserDto> findAllUsers() {
         List<User> users = userRepository.findAll();
         return users.stream()
                 .map((user -> mapToUserDto(user)))
-                //.map(userDtoMapper)
                 .collect(Collectors.toList());
     }
 

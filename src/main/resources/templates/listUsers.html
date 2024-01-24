@@ -25,9 +25,10 @@
   <div class="jumbotron jumbotron-fluid py-4 px-2">
     <h1 class="display-4 text-center">List of registered users</h1>
     <hr>
-    <span>
-      <p class="lead text-center">Manage registered users from our database</p>
-    </span>
+    <p class="lead text-center">Export users to an Excel file using the button below!</p>
+    <div class="text-center">
+      <button type="button" class="btn btn-success" onclick="exportToExcel()">Export</button>
+    </div>
   </div>
   <div class="container-fluid py-4 px-2">
     <table class="table table-bordered table-hover table-group-divider">
@@ -52,5 +53,31 @@
   </div>
 
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.js"
+        integrity="sha512-B+gr+zLWg81qxVwvtYwKrmjvQtZKD/GGFF7jD80OfzbqFw+NsbS5faEqpCO7Q7oRw1bYi0+WLJf54j8Vm7NADw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script th:inline="javascript">
+  function exportToExcel() {
+    var sortField = /*[[${sortField}]]*/ 'title';
+    var sortDir = /*[[${sortDir}]]*/ 'asc';
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/exportToExcel?sortField=' + sortField + '&sortDir=' + sortDir, true);
+    xhr.responseType = 'blob';
+
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          var blob = new Blob([xhr.response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          saveAs(blob, 'userlist.xlsx');
+        } else {
+          console.error('Server error');
+        }
+      }
+    };
+  }
+</script>
 </body>
 </html>
